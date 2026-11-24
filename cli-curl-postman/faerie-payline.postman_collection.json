@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "Faerie Payline Official API Collection",
+    "_postman_id": "9f6b4b30-2a1d-4e52-9100-faeriepayline",
+    "description": "کالکشن رسمی Postman / Insomnia برای تست سریع خط پرداخت فائری (Faerie Payline)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "https://faerie.ir" },
+    { "key": "payline_token", "value": "pl_YOUR_PAYLINE_TOKEN" },
+    { "key": "purchase_id", "value": "fp_EXAMPLE" }
+  ],
+  "item": [
+    {
+      "name": "1. List Products",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-Payline", "value": "{{payline_token}}" }],
+        "url": "{{base_url}}/api/v1/iap/products"
+      }
+    },
+    {
+      "name": "2. Init Purchase",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-Payline", "value": "{{payline_token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sku\": \"vip_monthly\",\n  \"user_id\": \"user_42\",\n  \"mobile\": \"09123456789\",\n  \"national_code\": \"0012345678\",\n  \"return_url\": \"https://example.ir/callback\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/iap/init"
+      }
+    },
+    {
+      "name": "3. Verify Status",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-Payline", "value": "{{payline_token}}" }],
+        "url": "{{base_url}}/api/v1/iap/status/{{purchase_id}}"
+      }
+    },
+    {
+      "name": "4. Consume Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-Payline", "value": "{{payline_token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"purchase_id\": \"{{purchase_id}}\",\n  \"user_id\": \"user_42\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/iap/consume"
+      }
+    },
+    {
+      "name": "5. Get Official Invoice",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-Payline", "value": "{{payline_token}}" }],
+        "url": "{{base_url}}/api/v1/iap/invoice/{{purchase_id}}"
+      }
+    }
+  ]
+}

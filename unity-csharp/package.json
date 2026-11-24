@@ -1,0 +1,12 @@
+{
+  "name": "ir.faerie.payline",
+  "version": "1.0.0",
+  "displayName": "Faerie Payline IAP SDK",
+  "description": "Official In-App Purchase (Payline) SDK and UI Button for Faerie Android Market in Unity.",
+  "unity": "2020.3",
+  "author": {
+    "name": "Faerie Developer Platform",
+    "url": "https://faerie.ir/developers/docs/payment"
+  },
+  "keywords": ["faerie", "iap", "billing", "payline", "iran", "android"]
+}

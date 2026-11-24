@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Faerie Payline In-App Billing & Web Gateway API
+  version: 1.61.0
+  description: مشخصات رسمی REST API خط پرداخت فائری (Faerie Payline) برای برنامه‌ها، بازی‌ها، برنامه‌های وب و فروشگاه‌ها.
+servers:
+  - url: https://faerie.ir
+    description: سرور اصلی مارکت فائری
+security:
+  - PaylineHeader: []
+components:
+  securitySchemes:
+    PaylineHeader:
+      type: apiKey
+      in: header
+      name: X-Payline
+      description: کلید ۴۳ کاراکتری با پیشوند pl_ دریافتی از پنل توسعه‌دهندگان فائری
+paths:
+  /api/v1/iap/products:
+    get:
+      summary: دریافت فهرست محصولات فعال برنامه
+      responses:
+        '200':
+          description: لیست آیتم‌ها به تومان (IRT)
+  /api/v1/iap/init:
+    post:
+      summary: ایجاد تراکنش جدید و دریافت payment_url
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [sku, user_id]
+              properties:
+                sku: { type: string, example: vip_monthly }
+                user_id: { type: string, example: user_42 }
+                amount: { type: integer, description: مبلغ به تومان برای آیتم‌های مبلغ دلخواه }
+                mobile: { type: string, example: "09123456789" }
+                national_code: { type: string, example: "0012345678" }
+                discount_code: { type: string }
+                return_url: { type: string, description: آدرس بازگشت خودکار وب یا دیپ‌لینک برنامه پس از پرداخت }
+      responses:
+        '200':
+          description: تراکنش ایجاد شد
+  /api/v1/iap/status/{purchase_id}:
+    get:
+      summary: استعلام قطعی وضعیت تراکنش
+      parameters:
+        - in: path
+          name: purchase_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: وضعیت فعلی تراکنش (pending, paid, consumed, failed, canceled)
+  /api/v1/iap/consume:
+    post:
+      summary: مصرف آیتم مصرفی (Consumable) پس از تحویل
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [purchase_id, user_id]
+              properties:
+                purchase_id: { type: string }
+                user_id: { type: string }
+      responses:
+        '200':
+          description: آیتم مصرف شد
+  /api/v1/iap/purchases:
+    get:
+      summary: تاریخچه خریدهای یک کاربر
+      parameters:
+        - in: query
+          name: user_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: آرایه‌ای از خریدهای کاربر
+  /api/v1/iap/invoice/{purchase_id}:
+    get:
+      summary: دریافت فاکتور رسمی تراکنش پرداخت‌شده
+      parameters:
+        - in: path
+          name: purchase_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: جزئیات کامل فاکتور رسمی مارکت فائری

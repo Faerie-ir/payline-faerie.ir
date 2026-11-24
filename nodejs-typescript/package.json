@@ -1,0 +1,11 @@
+{
+  "name": "@faerie/payline-node",
+  "version": "1.0.0",
+  "description": "Zero-dependency TypeScript/Node.js SDK for Faerie Payline (Express, Fastify, NestJS, Next.js).",
+  "type": "module",
+  "main": "src/index.ts",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["faerie", "payline", "nodejs", "typescript", "nextjs", "nestjs", "iap"]
+}

@@ -1,0 +1,14 @@
+name: faerie_payline
+description: Official Faerie Payline In-App Purchase SDK and UI Button for Flutter.
+version: 1.0.0
+homepage: https://faerie.ir/developers/docs/payment
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  url_launcher: ^6.2.5

@@ -1,0 +1,16 @@
+{
+  "name": "faerie/payline-php",
+  "description": "Official Faerie Payline SDK for Pure PHP 8+ and Laravel.",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.0",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Faerie\\Payline\\": "src/"
+    }
+  }
+}

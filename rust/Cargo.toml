@@ -1,0 +1,11 @@
+[package]
+name = "faerie-payline"
+version = "1.0.0"
+edition = "2021"
+description = "Official Rust async SDK for Faerie Payline In-App Billing API"
+license = "MIT"
+
+[dependencies]
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

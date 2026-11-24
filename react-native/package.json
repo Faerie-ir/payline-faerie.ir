@@ -1,0 +1,11 @@
+{
+  "name": "react-native-faerie-payline",
+  "version": "1.0.0",
+  "description": "Official Faerie Payline In-App Billing SDK and UI Button for React Native & Expo.",
+  "main": "src/index.tsx",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0"
+  },
+  "keywords": ["faerie", "payline", "react-native", "expo", "iap", "iran"]
+}
